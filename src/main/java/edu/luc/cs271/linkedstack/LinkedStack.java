@@ -2,6 +2,7 @@ package edu.luc.cs271.linkedstack;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 
 public class LinkedStack<E> implements IStack<E> {
@@ -11,34 +12,54 @@ public class LinkedStack<E> implements IStack<E> {
 
   // TODO why don't we need an explicit constructor?
 
+
   @Override
   public E push(final E obj) {
     // TODO
-    return null;
+    top = new Node<>(obj, top);
+    return obj;
   }
-
   @Override
   public E peek() {
     // TODO
-    return null;
+    if (top == null) {
+      throw new NoSuchElementException();
+    } else {
+      return null;
+    }
   }
 
   @Override
   public E pop() {
     // TODO
-    return null;
+      if(top == null){
+        throw new NoSuchElementException();
+      } else {
+        E temp = top.data;
+        top = top.next;
+        return temp;
+      }
   }
 
   @Override
   public boolean isEmpty() {
     // TODO
-    return false;
+      if(top==null) {
+        return true;
+      } else {
+        return false;
+      }
   }
 
   @Override
   public List<E> asList() {
     // TODO implement using an ArrayList preallocated with the right size
     // TODO add any instance variable(s) required to support this
-    return null;
+    List<E> list = new ArrayList<>();
+    while(top != null){
+      list.add(top.data);
+      top = top.next;
+    }
+    return list;
   }
 }
